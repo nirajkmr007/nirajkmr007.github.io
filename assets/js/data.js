@@ -20,7 +20,7 @@ const LAYERS = [
     role: "Software Engineer",
     desc: "Delivered data-warehousing, big-data, and IoT solutions across airline, education, and smart-mobility domains — Hadoop pipelines, ETL, and an end-to-end IoT smart-parking system.",
     stack: ["AWS", "Hadoop", "Data Warehousing", "SSIS", "SSRS", "IoT", "Talend"],
-    output: { title: "IoT Smart-Parking & DW pipelines", meta: "IoT · Airline · Education" }
+    output: { title: "IoT Smart-Parking & DW pipelines", meta: "IoT · Airline · Education", link: "iot-smart-parking" }
   },
   {
     tier: "Silver", layer: "Cleansed",
@@ -79,6 +79,15 @@ const PROJECTS = [
     tags: ["PySpark", "AWS", "Recommendations", "Real Estate"],
     role: "Developer",
     team: "Team of 9"
+  },
+  {
+    id: "iot-smart-parking",
+    when: "2014 – 2017 · Marlabs",
+    title: "IoT Smart-Parking & Data Warehousing",
+    desc: "Early-career foundation across big data and IoT. Built Hadoop and SSIS/SSRS data-warehousing pipelines for airline and education clients, and designed an end-to-end IoT smart-parking system that streamed live parking-space availability to web and mobile using Raspberry Pi, Arduino and ultrasonic sensors.",
+    tags: ["Hadoop", "Data Warehousing", "IoT", "Python", "REST"],
+    role: "Software Engineer",
+    team: "IoT · Airline · Education"
   }
 ];
 
