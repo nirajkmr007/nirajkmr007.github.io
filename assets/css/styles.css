@@ -158,6 +158,10 @@ nav{
 .proj::after{content:"";position:absolute;left:0;top:0;height:100%;width:3px;background:var(--accent);transform:scaleY(0);transform-origin:top;transition:transform .3s}
 .proj:hover{border-color:var(--line-strong);transform:translateY(-3px)}
 .proj:hover::after{transform:scaleY(1)}
+/* offset for the sticky nav + highlight when linked from a medallion output */
+.proj{scroll-margin-top:88px}
+.proj:target{border-color:color-mix(in srgb,var(--accent) 60%,var(--line-strong))}
+.proj:target::after{transform:scaleY(1)}
 .proj .when{font-family:var(--font-mono);font-size:.78rem;color:var(--text-faint);margin-bottom:10px}
 .proj h3{font-family:var(--font-display);font-weight:600;font-size:1.5rem;letter-spacing:-.02em;margin-bottom:10px;line-height:1.1}
 .proj p{color:var(--text-dim);font-size:.98rem;margin-bottom:16px;max-width:60ch}
@@ -248,7 +252,7 @@ nav{
   background:linear-gradient(180deg,transparent,var(--metal),transparent);
   animation:convey 1.9s linear infinite}
 @keyframes convey{0%{transform:translateY(-120%)}100%{transform:translateY(360%)}}
-.out-card{border:1px solid color-mix(in srgb,var(--metal) 45%,var(--line));
+.out-card{display:block;border:1px solid color-mix(in srgb,var(--metal) 45%,var(--line));
   background:var(--bg-soft);border-radius:10px;padding:10px 12px;
   animation:outPulse 6s ease-out var(--mdelay) infinite}
 .out-title{font-weight:600;font-size:.9rem;color:var(--text);line-height:1.25}
@@ -257,6 +261,14 @@ nav{
   0%,15%,100%{box-shadow:0 0 0 0 transparent;border-color:color-mix(in srgb,var(--metal) 35%,var(--line))}
   6%{box-shadow:0 0 20px -2px color-mix(in srgb,var(--metal) 55%,transparent);border-color:var(--metal)}
 }
+/* clickable output → jumps to the full project card */
+a.out-card{text-decoration:none;color:inherit;cursor:pointer;transition:transform .2s ease}
+a.out-card:hover{transform:translateY(-2px)}
+a.out-card:hover .out-title{color:var(--metal)}
+a.out-card:focus-visible{outline:2px solid var(--metal);outline-offset:2px}
+.out-cta{display:block;margin-top:8px;font-family:var(--font-mono);font-size:.62rem;
+  letter-spacing:.04em;color:var(--metal);opacity:.85}
+a.out-card:hover .out-cta{opacity:1}
 
 /* staggered entrance — rides the existing .reveal -> .in toggle */
 .reveal .medal{opacity:0;transform:scale(.55)}

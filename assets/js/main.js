@@ -41,10 +41,16 @@ const MEDAL_CYCLE = 6; /* seconds — must match the keyframe durations in style
           <div class="conduit" aria-hidden="true"></div>
           <div class="io io-output">
             <span class="io-label">Data product out</span>
-            <div class="out-card">
-              <div class="out-title">${L.output.title}</div>
-              <div class="out-meta">${L.output.meta}</div>
-            </div>
+            ${L.output.link
+              ? `<a class="out-card" href="#proj-${L.output.link}" aria-label="Jump to the ${L.output.title} project">
+                   <div class="out-title">${L.output.title}</div>
+                   <div class="out-meta">${L.output.meta}</div>
+                   <span class="out-cta">View project →</span>
+                 </a>`
+              : `<div class="out-card">
+                   <div class="out-title">${L.output.title}</div>
+                   <div class="out-meta">${L.output.meta}</div>
+                 </div>`}
           </div>
         </div>
       </div>
@@ -54,7 +60,7 @@ const MEDAL_CYCLE = 6; /* seconds — must match the keyframe durations in style
 
 /* projects */
 setHTML("#projectList", PROJECTS.map(p=>`
-  <article class="proj">
+  <article class="proj"${p.id ? ` id="proj-${p.id}"` : ""}>
     <div>
       <div class="when">${p.when}</div>
       <h3>${p.title}</h3>
