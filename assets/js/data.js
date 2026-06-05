@@ -106,15 +106,23 @@ const SKILLS = [
   { group: "Storage & Warehouse",   items: ["Snowflake", "Data Lake", "SQL", "PostgreSQL"] },
   { group: "Languages",             items: ["Python", "SQL", "Lua"] },
   { group: "Engineering & Practices", items: ["Microservices", "Event-Driven Design", "REST APIs", "CI/CD", "TDD", "Clean Code", "Git", "Agile/Scrum"] },
-  { group: "Certifications & Education", items: ["SnowPro Associate", "B.Tech, CSE (2013)"] },
+  { group: "Certifications & Education", items: ["SnowPro Associate", "MongoDB Associate", "B.Tech, CSE (2013)"] },
 ];
 
-/* ---- 5. TECH STACK as a DATA PIPELINE (devicon CDN icon paths) ----
-   The stack reads as the path data takes: ingest → process → store →
-   orchestrate. Every icon from the old marquee is preserved here.        */
-const PIPELINE = [
-  { stage: "Ingest",      icons: ["python/python-original", "amazonwebservices/amazonwebservices-original-wordmark"] },
-  { stage: "Process",     icons: ["apachespark/apachespark-original", "pandas/pandas-original", "numpy/numpy-original"] },
-  { stage: "Store",       icons: ["postgresql/postgresql-original", "apachehadoop/apachehadoop-original"] },
-  { stage: "Orchestrate", icons: ["azure/azure-original", "jenkins/jenkins-original", "git/git-original"] },
+/* ---- 5. CERTIFICATIONS (shown in the band under the hero) ----------
+   `url` is the public credential-verification link; leave it "" if you
+   don't have one yet and the card renders without a Verify button.       */
+const CERTS = [
+  {
+    name: "SnowPro Associate",
+    track: "Platform Certification",
+    issuer: "Snowflake",
+    url: "https://achieve.snowflake.com/1640b93c-6f37-4a28-aefb-371406259ff0"
+  },
+  {
+    name: "MongoDB Associate",          /* TODO: confirm exact certification title */
+    track: "Certification",
+    issuer: "MongoDB",
+    url: ""                             /* TODO: add the real credential URL (the one supplied was a 404) */
+  },
 ];

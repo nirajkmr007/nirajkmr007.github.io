@@ -18,7 +18,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <!-- styles live in assets/css/styles.css — bump ?v= on every asset change to bust CDN/browser cache -->
-<link rel="stylesheet" href="assets/css/styles.css?v=12">
+<link rel="stylesheet" href="assets/css/styles.css?v=13">
 </head>
 <body>
 
@@ -58,9 +58,12 @@
   <div class="stats" id="statStrip"><!-- filled by JS --></div>
 </header>
 
-<!-- ============================ PIPELINE BAND ============================ -->
-<div class="pipeline-band">
-  <div class="pipeline-in" id="pipelineBand"><!-- stages filled by JS --></div>
+<!-- ============================ CERTIFICATIONS BAND ============================ -->
+<div class="certs-band">
+  <div class="certs-in">
+    <span class="certs-tag"><i class="dot"></i> Verified credentials</span>
+    <div class="cert-row" id="certBand"><!-- cards filled by JS --></div>
+  </div>
 </div>
 
 <!-- ============================ EXPERIENCE (MEDALLION) ============================ -->
@@ -144,7 +147,7 @@
 </footer>
 
 <!-- content data, then render/interaction logic (data.js must load first) -->
-<script src="assets/js/data.js?v=12"></script>
-<script src="assets/js/main.js?v=12"></script>
+<script src="assets/js/data.js?v=13"></script>
+<script src="assets/js/main.js?v=13"></script>
 </body>
 </html>
