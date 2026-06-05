@@ -201,7 +201,10 @@ nav{
   background:var(--accent);box-shadow:0 0 16px 3px color-mix(in srgb,var(--accent) 80%,transparent);
   z-index:2;animation:traverse 6s cubic-bezier(.5,0,.5,1) infinite}
 @keyframes traverse{0%{left:-1%;opacity:0}8%{opacity:1}92%{opacity:1}100%{left:101%;opacity:0}}
-@keyframes descend{0%{top:-1%;opacity:0}8%{opacity:1}92%{opacity:1}100%{top:101%;opacity:0}}
+/* vertical mode is reversed (platinum top → raw bottom), so the packet
+   ascends from the raw node at the bottom up to platinum, keeping the
+   raw → platinum refinement direction and staying in sync with the glow */
+@keyframes ascend{0%{top:101%;opacity:0}8%{opacity:1}92%{opacity:1}100%{top:-1%;opacity:0}}
 
 /* one layer = a vertical card: node on top, body below */
 .layer{flex:1 1 0;min-width:0;display:flex;flex-direction:column;position:relative}
@@ -261,12 +264,13 @@ nav{
 .reveal.in .medal{opacity:1;transform:none;transition:opacity .5s var(--ri),transform .5s var(--ri)}
 .reveal.in .layer-body{opacity:1;transform:none;transition:opacity .6s var(--ri) ease,transform .6s var(--ri) ease}
 
-/* narrow screens: collapse to a vertical top → bottom timeline */
+/* narrow screens: collapse to a vertical timeline, newest first
+   (platinum on top → raw at the bottom, reverse-chronological) */
 @media(max-width:880px){
-  .medallion{flex-direction:column;gap:34px;align-items:stretch}
+  .medallion{flex-direction:column-reverse;gap:34px;align-items:stretch}
   .medallion::before{top:6px;bottom:6px;left:25px;right:auto;width:2px;height:auto;
     background:linear-gradient(180deg,transparent,var(--line-strong) 7%,var(--line-strong) 93%,transparent)}
-  .spine-packet{top:0;left:20px;animation:descend 6s cubic-bezier(.5,0,.5,1) infinite}
+  .spine-packet{top:0;left:20px;animation:ascend 6s cubic-bezier(.5,0,.5,1) infinite}
   .layer{flex-direction:row;align-items:start;gap:0 16px}
   .medal{align-self:start;width:52px;height:52px}
   .medal b{font-size:.5rem}
