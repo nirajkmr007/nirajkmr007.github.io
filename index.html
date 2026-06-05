@@ -63,16 +63,23 @@
   <div class="marquee-track" id="stackTrack"><!-- filled by JS --></div>
 </div>
 
-<!-- ============================ EXPERIENCE ============================ -->
+<!-- ============================ EXPERIENCE (MEDALLION) ============================ -->
 <section class="wrap reveal" id="experience">
   <div class="sec-head">
     <div>
-      <div class="idx">// 01 — career</div>
+      <div class="idx">// 01 — career, modeled as a medallion pipeline</div>
       <h2>Experience.</h2>
     </div>
     <a href="https://www.linkedin.com/in/niraj-kumar-0530324a/" target="_blank" rel="noopener">Full history on LinkedIn ↗</a>
   </div>
-  <div class="timeline" id="xpList"><!-- filled by JS --></div>
+  <p class="medallion-intro">Ten years of data engineering, modeled as a <strong>medallion architecture</strong>. Each organisation is a refinement layer — skills flow in as input, shipped data products flow out, and the craft is refined one tier further at every step: <strong>Raw → Silver → Gold → Platinum</strong>.</p>
+  <div class="legend" aria-hidden="true">
+    <span style="--lg:#c1773c"><i></i> Raw · Bronze</span>
+    <span style="--lg:#9aa7b2"><i></i> Cleansed · Silver</span>
+    <span style="--lg:#d6a526"><i></i> Curated · Gold</span>
+    <span style="--lg:var(--accent)"><i></i> Productized · Platinum</span>
+  </div>
+  <div class="medallion" id="medallion"><!-- filled by JS --></div>
 </section>
 
 <!-- ============================ WORK ============================ -->

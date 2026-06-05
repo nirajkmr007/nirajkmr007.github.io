@@ -6,35 +6,48 @@
    These arrays are read by assets/js/main.js (loaded right after this file).
    ======================================================================= */
 
-/* ---- 1. EXPERIENCE (newest first) --------------------------------- */
-const EXPERIENCE = [
+/* ---- 1. CAREER AS A MEDALLION ARCHITECTURE ------------------------
+   Each organisation is a refinement layer, oldest → newest:
+   Raw (Bronze) → Cleansed (Silver) → Curated (Gold) → Productized (Platinum).
+   `stack` = the skills that flow IN; `output` = the data product that flows OUT.
+   Ordered raw → platinum (chronological) so the pipeline reads top to bottom.
+   ------------------------------------------------------------------- */
+const LAYERS = [
   {
-    when: "Jan 2024 – Present",
-    company: "Vestas",
-    role: "Senior Data Engineer",
-    desc: "Building real-time and batch data platforms for wind-turbine condition monitoring on Azure Databricks — ingesting terabytes of turbine telemetry into clean, analytics-ready datasets in Snowflake for reliability engineers and data scientists.",
-    stack: ["PySpark", "Spark Streaming", "Databricks", "Azure DevOps", "Data Factory", "Snowflake"]
-  },
-  {
-    when: "Jun 2019 – Dec 2023",
-    company: "Utopus Insights",
-    role: "Senior Data Engineer I → Data Engineer",
-    desc: "Designed scalable streaming and batch pipelines for renewable-energy analytics on AWS and Databricks, powering wind & solar power-forecasting products for asset owners, operators, and power traders.",
-    stack: ["PySpark", "Spark Streaming", "Databricks", "Kinesis", "Lambda", "Step Functions", "EventBridge", "API Gateway"]
-  },
-  {
-    when: "Dec 2017 – Jun 2019",
-    company: "Brillio",
-    role: "Senior Engineer",
-    desc: "Built large-scale data-processing pipelines on AWS for real-estate and analytics clients including Realtor.com — from data migration frameworks to recommendation data products.",
-    stack: ["PySpark", "Python", "EMR", "Athena", "S3", "Lambda", "Jenkins"]
-  },
-  {
+    tier: "Bronze", layer: "Raw",
     when: "Jun 2014 – Nov 2017",
     company: "Marlabs",
     role: "Software Engineer",
     desc: "Delivered data-warehousing, big-data, and IoT solutions across airline, education, and smart-mobility domains — Hadoop pipelines, ETL, and an end-to-end IoT smart-parking system.",
-    stack: ["AWS", "Hadoop", "Data Warehousing", "SSIS", "SSRS", "IoT", "Talend"]
+    stack: ["AWS", "Hadoop", "Data Warehousing", "SSIS", "SSRS", "IoT", "Talend"],
+    output: { title: "IoT Smart-Parking & DW pipelines", meta: "IoT · Airline · Education" }
+  },
+  {
+    tier: "Silver", layer: "Cleansed",
+    when: "Dec 2017 – Jun 2019",
+    company: "Brillio",
+    role: "Senior Engineer",
+    desc: "Built large-scale data-processing pipelines on AWS for real-estate and analytics clients including Realtor.com — from data migration frameworks to recommendation data products.",
+    stack: ["PySpark", "Python", "EMR", "Athena", "S3", "Lambda", "Jenkins"],
+    output: { title: "Similar-Homes Recommendation Engine", meta: "Realtor.com · Real Estate" }
+  },
+  {
+    tier: "Gold", layer: "Curated",
+    when: "Jun 2019 – Dec 2023",
+    company: "Utopus Insights",
+    role: "Senior Data Engineer I → Data Engineer",
+    desc: "Designed scalable streaming and batch pipelines for renewable-energy analytics on AWS and Databricks, powering wind & solar power-forecasting products for asset owners, operators, and power traders.",
+    stack: ["PySpark", "Spark Streaming", "Databricks", "Kinesis", "Lambda", "Step Functions", "EventBridge", "API Gateway"],
+    output: { title: "Scipher FX — Power Forecasting", meta: "Renewable Energy · Tech Lead" }
+  },
+  {
+    tier: "Platinum", layer: "Productized",
+    when: "Jan 2024 – Present",
+    company: "Vestas",
+    role: "Senior Data Engineer",
+    desc: "Building real-time and batch data platforms for wind-turbine condition monitoring on Azure Databricks — ingesting terabytes of turbine telemetry into clean, analytics-ready datasets in Snowflake for reliability engineers and data scientists.",
+    stack: ["PySpark", "Spark Streaming", "Databricks", "Azure DevOps", "Data Factory", "Snowflake"],
+    output: { title: "Condition Monitoring Data Product", meta: "Azure Databricks → Snowflake" }
   }
 ];
 

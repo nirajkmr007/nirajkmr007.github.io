@@ -5,17 +5,49 @@
    ======================================================================= */
 const $ = (s)=>document.querySelector(s);
 
-/* experience timeline */
-$("#xpList").innerHTML = EXPERIENCE.map(x=>`
-  <article class="xp">
-    <div class="when">${x.when}</div>
-    <div>
-      <div class="company">${x.company}</div>
-      <div class="role">${x.role}</div>
-      <p>${x.desc}</p>
-      <div class="xtags">${x.stack.map(t=>`<span>${t}</span>`).join("")}</div>
-    </div>
-  </article>`).join("");
+/* experience as a medallion architecture (raw → silver → gold → platinum)
+   Skills flow IN as input chips, the layer refines them, a data product flows OUT.
+   The metallic tint + animation timings are passed per-layer as CSS variables. */
+const MEDAL_COLOR = { Bronze:"#c1773c", Silver:"#9aa7b2", Gold:"#d6a526", Platinum:"var(--accent)" };
+const MEDAL_CYCLE = 6; /* seconds — must match the keyframe durations in styles.css */
+(function renderMedallion(){
+  const host = $("#medallion");
+  if(!host) return;
+  const step = MEDAL_CYCLE / LAYERS.length;
+  host.innerHTML = `<span class="spine-packet" aria-hidden="true"></span>` + LAYERS.map((L,i)=>{
+    const metal  = MEDAL_COLOR[L.tier] || "var(--accent)";
+    const mdelay = (0.6 + i*step).toFixed(2) + "s";   /* when the packet reaches this node */
+    const ri     = (i*0.12).toFixed(2) + "s";          /* entrance stagger */
+    const vars   = `--metal:${metal};--mdelay:${mdelay};--ri:${ri}`;
+    return `
+    <div class="medal" style="${vars}"><b>${L.tier}</b></div>
+    <article class="layer-body" style="${vars}">
+      <div class="layer-head">
+        <div>
+          <div class="company">${L.company}</div>
+          <div class="role">${L.role}</div>
+        </div>
+        <div class="when">${L.when}</div>
+      </div>
+      <span class="layer-tag">${L.layer} layer</span>
+      <p class="layer-desc">${L.desc}</p>
+      <div class="pipeline">
+        <div class="io io-input">
+          <span class="io-label">Skills in →</span>
+          <div class="chips">${L.stack.map(s=>`<span class="chip">${s}</span>`).join("")}</div>
+        </div>
+        <div class="conduit" aria-hidden="true"></div>
+        <div class="io io-output">
+          <span class="io-label">→ Data product out</span>
+          <div class="out-card">
+            <div class="out-title">${L.output.title}</div>
+            <div class="out-meta">${L.output.meta}</div>
+          </div>
+        </div>
+      </div>
+    </article>`;
+  }).join("");
+})();
 
 /* projects */
 $("#projectList").innerHTML = PROJECTS.map(p=>`
