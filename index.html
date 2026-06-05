@@ -18,7 +18,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <!-- styles live in assets/css/styles.css — bump ?v= on every asset change to bust CDN/browser cache -->
-<link rel="stylesheet" href="assets/css/styles.css?v=7">
+<link rel="stylesheet" href="assets/css/styles.css?v=10">
 </head>
 <body>
 
@@ -97,11 +97,12 @@
 <section class="wrap reveal" id="skills">
   <div class="sec-head">
     <div>
-      <div class="idx">// 03 — toolkit</div>
+      <div class="idx">// 03 — toolkit graph</div>
       <h2>Skills.</h2>
     </div>
   </div>
-  <div class="skills" id="skillList"><!-- filled by JS --></div>
+  <p class="graph-hint">Every skill set is a node in the graph — hover any bubble to pull it into focus.</p>
+  <div class="skill-graph" id="skillGraph"><!-- floating nodes filled by JS --></div>
 </section>
 
 <!-- ============================ CONTACT ============================ -->
@@ -143,7 +144,7 @@
 </footer>
 
 <!-- content data, then render/interaction logic (data.js must load first) -->
-<script src="assets/js/data.js?v=7"></script>
-<script src="assets/js/main.js?v=7"></script>
+<script src="assets/js/data.js?v=10"></script>
+<script src="assets/js/main.js?v=10"></script>
 </body>
 </html>

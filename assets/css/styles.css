@@ -299,13 +299,50 @@ a.out-card:hover .out-cta{opacity:1}
 }
 
 /* =======================================================================
-   8. SKILLS
+   8. SKILLS  — floating graph of category bubbles (nodes filled by JS)
+       Each group is a node; faint <line> edges (drawn in JS) connect the
+       nearest nodes and follow them as they drift. Hover a node to focus.
    ======================================================================= */
-.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
-.skill-card{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);padding:26px}
-.skill-card h4{font-family:var(--font-mono);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
-.skill-card ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px}
-.skill-card li{font-size:.9rem;color:var(--text-dim);border:1px solid var(--line);padding:5px 11px;border-radius:8px}
+.graph-hint{color:var(--text-dim);font-size:1rem;max-width:60ch;margin:-16px 0 30px}
+
+.skill-graph{position:relative;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;
+  gap:24px 30px;padding:10px 0}
+.graph-edges{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:0}
+.edge{stroke:var(--line-strong);stroke-width:1;opacity:.4}
+
+/* the wrapper carries the idle float so the inner card is free to scale on hover */
+.node{position:relative;z-index:1;animation:bubbleFloat var(--fdur,9s) ease-in-out var(--fdelay,0s) infinite;will-change:transform}
+@keyframes bubbleFloat{0%,100%{transform:translate(0,0)}33%{transform:translate(6px,-13px)}66%{transform:translate(-6px,-5px)}}
+
+.node-card{position:relative;display:flex;align-items:center;justify-content:center;text-align:center;
+  aspect-ratio:1;border-radius:50%;       /* JS sets an exact width/height so every node is a true circle */
+  background:radial-gradient(120% 120% at 50% 30%,var(--surface),var(--bg-soft));
+  border:1px solid var(--line-strong);
+  box-shadow:0 12px 34px rgba(0,0,0,.30),inset 0 1px 0 rgba(255,255,255,.04);
+  transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s,border-color .35s,opacity .35s,filter .35s}
+.node-inner{display:flex;flex-direction:column;align-items:center;justify-content:center;max-width:160px}
+.node-card h4{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:10px;line-height:1.25}
+.node-card ul{list-style:none;display:flex;flex-wrap:wrap;gap:5px;justify-content:center}
+.node-card li{font-size:.7rem;color:var(--text-dim);border:1px solid var(--line);
+  background:color-mix(in srgb,var(--bg-soft) 70%,transparent);padding:3px 9px;border-radius:999px;
+  opacity:.85;transition:opacity .3s,color .3s,border-color .3s}
+
+/* hover: bigger + brighter, siblings recede (only where real hover exists,
+   so a tap on touch screens doesn't leave a node stuck in focus) */
+@media (hover:hover){
+  .node:hover{z-index:5;animation-play-state:paused}
+  .node:hover .node-card{transform:scale(1.18);border-color:var(--accent);
+    box-shadow:0 0 0 1px var(--accent),0 18px 60px color-mix(in srgb,var(--accent) 28%,transparent)}
+  .node:hover .node-card li{opacity:1;color:var(--text);border-color:color-mix(in srgb,var(--accent) 35%,var(--line))}
+  .skill-graph:hover .node:not(:hover) .node-card{opacity:.4;filter:saturate(.6)}
+}
+
+@media(prefers-reduced-motion:reduce){.node{animation:none}}
+@media(max-width:560px){
+  .graph-edges{display:none}
+  .skill-graph{gap:18px}
+}
 
 /* =======================================================================
    9. CONTACT

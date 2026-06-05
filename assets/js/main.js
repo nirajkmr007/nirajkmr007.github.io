@@ -77,10 +77,83 @@ setHTML("#projectList", PROJECTS.map(p=>`
 setHTML("#statStrip", STATS.map(s=>`
   <div class="stat"><div class="num">${s.num}</div><div class="lbl">${s.lbl}</div></div>`).join(""));
 
-/* skills */
-setHTML("#skillList", SKILLS.map(s=>`
-  <div class="skill-card"><h4>${s.group}</h4>
-    <ul>${s.items.map(i=>`<li>${i}</li>`).join("")}</ul></div>`).join(""));
+/* skills as a floating graph: each group is a node, faint edges link the
+   nearest nodes and follow them as they drift; hover focuses a node */
+(function renderSkillGraph(){
+  const host = $("#skillGraph"); if(!host) return;
+  const SVGNS = "http://www.w3.org/2000/svg";
+  host.innerHTML =
+    `<svg class="graph-edges" aria-hidden="true"></svg>` +
+    SKILLS.map((s,i)=>{
+      const dur   = (8 + (i % 5) * 1.1).toFixed(1) + "s";
+      const delay = (-(i * 1.3)).toFixed(1) + "s";
+      return `<div class="node" style="--fdur:${dur};--fdelay:${delay}">
+        <div class="node-card">
+          <div class="node-inner">
+            <h4>${s.group}</h4>
+            <ul>${s.items.map(it=>`<li>${it}</li>`).join("")}</ul>
+          </div>
+        </div>
+      </div>`;
+    }).join("");
+
+  const svg    = host.querySelector(".graph-edges");
+  const nodes  = [...host.querySelectorAll(".node")];
+  const cards  = nodes.map(n=>n.querySelector(".node-card"));
+  const inners = nodes.map(n=>n.querySelector(".node-inner"));
+  let edges = [];
+
+  /* size each node to a circle whose diameter contains its content */
+  function sizeCircles(){
+    cards.forEach((card,i)=>{
+      card.style.width = card.style.height = "";   /* release, then measure content */
+      const d = Math.ceil(Math.hypot(inners[i].offsetWidth, inners[i].offsetHeight)) + 12;
+      card.style.width = card.style.height = d + "px";
+    });
+  }
+  sizeCircles();
+
+  const centers = ()=>{
+    const hb = host.getBoundingClientRect();
+    return nodes.map(n=>{ const b = n.getBoundingClientRect();
+      return { x: b.left - hb.left + b.width/2, y: b.top - hb.top + b.height/2 }; });
+  };
+  /* topology computed once from base positions: each node → its 2 nearest */
+  function rebuild(){
+    const c = centers(); edges = []; const seen = new Set();
+    c.forEach((p,i)=>{
+      c.map((q,j)=>({ j, d: Math.hypot(p.x-q.x, p.y-q.y) }))
+       .filter(o=>o.j!==i).sort((a,b)=>a.d-b.d).slice(0,2)
+       .forEach(o=>{ const k = i<o.j ? `${i}-${o.j}` : `${o.j}-${i}`;
+         if(!seen.has(k)){ seen.add(k); edges.push([i,o.j]); } });
+    });
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    edges.forEach(()=>{ const l = document.createElementNS(SVGNS,"line"); l.setAttribute("class","edge"); svg.appendChild(l); });
+  }
+  function draw(){
+    const hb = host.getBoundingClientRect();
+    svg.setAttribute("viewBox", `0 0 ${hb.width} ${hb.height}`);
+    const c = centers(), lines = svg.children;
+    edges.forEach((e,k)=>{ const l = lines[k]; if(!l) return;
+      l.setAttribute("x1", c[e[0]].x); l.setAttribute("y1", c[e[0]].y);
+      l.setAttribute("x2", c[e[1]].x); l.setAttribute("y2", c[e[1]].y); });
+  }
+
+  const reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let raf = null, running = false;
+  const loop  = ()=>{ draw(); raf = requestAnimationFrame(loop); };
+  const start = ()=>{ if(!running && !reduce){ running = true; loop(); } };
+  const stop  = ()=>{ running = false; if(raf) cancelAnimationFrame(raf); };
+
+  const refresh = ()=>{ sizeCircles(); rebuild(); draw(); };
+  requestAnimationFrame(()=>requestAnimationFrame(refresh)); /* after first layout */
+  window.addEventListener("load", refresh);                  /* after fonts settle  */
+  window.addEventListener("resize", refresh);
+
+  /* only animate the edges while the graph is on screen */
+  new IntersectionObserver(es=>es.forEach(e=> e.isIntersecting ? start() : stop()),
+    { threshold:.04 }).observe(host);
+})();
 
 /* stack marquee (doubled for seamless loop) */
 setHTML("#stackTrack", STACK.concat(STACK).map(s=>
