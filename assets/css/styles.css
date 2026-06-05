@@ -71,8 +71,8 @@ nav{
 .nav-in{display:flex;align-items:center;gap:24px;height:66px;max-width:var(--maxw);margin:0 auto;padding:0 24px}
 .brand{font-family:var(--font-display);font-weight:800;font-size:1.15rem;letter-spacing:-.02em}
 .brand b{color:var(--accent)}
-.nav-links{display:flex;gap:26px;margin-left:auto;align-items:center}
-.nav-links a{font-size:.9rem;color:var(--text-dim);transition:color .2s}
+.nav-links{display:flex;gap:20px;margin-left:auto;align-items:center}
+.nav-links a{font-size:.9rem;color:var(--text-dim);transition:color .2s;white-space:nowrap}
 .nav-links a:hover{color:var(--text)}
 .icon-btn{
   width:38px;height:38px;border:1px solid var(--line-strong);border-radius:50%;
@@ -94,9 +94,15 @@ nav{
   box-shadow:0 0 8px color-mix(in srgb,var(--accent) 80%,transparent);animation:visitPulse 2.2s ease-in-out infinite}
 .visits-num{font-weight:500;color:var(--text)}
 @keyframes visitPulse{0%,100%{opacity:1}50%{opacity:.35}}
+/* résumé download button */
+.resume-btn{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line-strong);
+  padding:8px 15px;border-radius:999px;font-weight:600;font-size:.86rem;color:var(--text);
+  transition:border-color .2s,color .2s;white-space:nowrap}
+.resume-btn:hover{border-color:var(--accent);color:var(--accent)}
+.resume-btn .ico{flex:none}
 @media (prefers-reduced-motion:reduce){.visits-dot{animation:none}}
-@media(max-width:760px){.nav-links a:not(.cta-link){display:none}}
-@media(max-width:560px){.visits{display:none}}
+@media(max-width:900px){.nav-links a:not(.cta-link):not(.resume-btn){display:none}.nav-in{gap:13px}}
+@media(max-width:560px){.visits{display:none}.resume-btn{padding:8px 11px}.resume-btn .label{display:none}}
 
 /* =======================================================================
    4. HERO
