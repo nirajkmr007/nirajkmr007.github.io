@@ -86,7 +86,17 @@ nav{
   transition:transform .2s,box-shadow .2s;white-space:nowrap;
 }
 .cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px color-mix(in srgb,var(--accent) 40%,transparent)}
+/* visitor counter pill */
+.visits{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:.76rem;
+  color:var(--text-dim);border:1px solid var(--line-strong);border-radius:999px;padding:5px 11px;white-space:nowrap;cursor:default}
+.visits[hidden]{display:none}
+.visits-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);
+  box-shadow:0 0 8px color-mix(in srgb,var(--accent) 80%,transparent);animation:visitPulse 2.2s ease-in-out infinite}
+.visits-num{font-weight:500;color:var(--text)}
+@keyframes visitPulse{0%,100%{opacity:1}50%{opacity:.35}}
+@media (prefers-reduced-motion:reduce){.visits-dot{animation:none}}
 @media(max-width:760px){.nav-links a:not(.cta-link){display:none}}
+@media(max-width:560px){.visits{display:none}}
 
 /* =======================================================================
    4. HERO

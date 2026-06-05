@@ -173,6 +173,27 @@ setHTML("#certBand", CERTS.map(c=>{
 /* year */
 setText("#yr", new Date().getFullYear());
 
+/* visitor counter — free, no-backend hit counter (Abacus). Counts once per
+   browser session so refreshes don't inflate it; stays hidden if it fails. */
+(function visitorCounter(){
+  const wrap = $("#visits"), num = $("#visitsNum");
+  if(!wrap || !num) return;
+  const NS = "nirajkmr007-portfolio", KEY = "visits";
+  let firstThisSession = true;
+  try { firstThisSession = !sessionStorage.getItem("counted"); } catch(e){}
+  const verb = firstThisSession ? "hit" : "get";
+  fetch(`https://abacus.jasoncameron.dev/${verb}/${NS}/${KEY}`)
+    .then(r => r.ok ? r.json() : Promise.reject(r.status))
+    .then(d => {
+      if(d && typeof d.value === "number"){
+        num.textContent = d.value.toLocaleString();
+        wrap.removeAttribute("hidden");
+        try { sessionStorage.setItem("counted", "1"); } catch(e){}
+      }
+    })
+    .catch(()=>{ /* service unreachable → leave the counter hidden */ });
+})();
+
 /* ---- theme toggle (remembers choice; degrades gracefully) -------- */
 const root = document.documentElement, tBtn = $("#themeBtn");
 let theme = "dark";
