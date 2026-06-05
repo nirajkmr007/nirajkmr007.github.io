@@ -191,19 +191,23 @@ nav{
 .legend span{font-family:var(--font-mono);font-size:.72rem;color:var(--text-dim);display:inline-flex;align-items:center;gap:8px}
 .legend i{width:11px;height:11px;border-radius:50%;border:2px solid var(--lg);background:color-mix(in srgb,var(--lg) 22%,transparent)}
 
-/* two columns: medallion rail + layer body, one row per layer */
-.medallion{display:grid;grid-template-columns:72px 1fr;gap:42px 26px;position:relative}
-/* the pipeline spine running through every medallion node */
-.medallion::before{content:"";position:absolute;left:35px;top:6px;bottom:6px;width:2px;
-  background:linear-gradient(180deg,transparent,var(--line-strong) 7%,var(--line-strong) 93%,transparent)}
-/* glowing data packet travelling down the spine */
-.spine-packet{position:absolute;left:30px;top:0;width:12px;height:12px;border-radius:50%;
+/* horizontal pipeline: four layers side by side, raw → platinum */
+.medallion{display:flex;gap:22px;position:relative;align-items:stretch}
+/* the spine running left → right through every medallion node */
+.medallion::before{content:"";position:absolute;top:35px;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--line-strong) 9%,var(--line-strong) 91%,transparent)}
+/* glowing data packet travelling along the spine */
+.spine-packet{position:absolute;top:30px;left:0;width:12px;height:12px;border-radius:50%;
   background:var(--accent);box-shadow:0 0 16px 3px color-mix(in srgb,var(--accent) 80%,transparent);
-  z-index:2;animation:descend 6s cubic-bezier(.5,0,.5,1) infinite}
+  z-index:2;animation:traverse 6s cubic-bezier(.5,0,.5,1) infinite}
+@keyframes traverse{0%{left:-1%;opacity:0}8%{opacity:1}92%{opacity:1}100%{left:101%;opacity:0}}
 @keyframes descend{0%{top:-1%;opacity:0}8%{opacity:1}92%{opacity:1}100%{top:101%;opacity:0}}
 
+/* one layer = a vertical card: node on top, body below */
+.layer{flex:1 1 0;min-width:0;display:flex;flex-direction:column;position:relative}
+
 /* medallion node */
-.medal{grid-column:1;align-self:start;width:72px;height:72px;border-radius:50%;position:relative;z-index:1;
+.medal{align-self:center;width:72px;height:72px;border-radius:50%;position:relative;z-index:1;
   display:grid;place-items:center;text-align:center;background:var(--surface);
   border:2px solid color-mix(in srgb,var(--metal) 60%,var(--line));
   box-shadow:0 0 0 6px var(--bg);
@@ -216,34 +220,32 @@ nav{
 }
 
 /* layer body */
-.layer-body{grid-column:2;min-width:0}
-.layer-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
-.layer-body .company{font-family:var(--font-display);font-weight:600;font-size:1.35rem;letter-spacing:-.02em}
-.layer-body .role{font-family:var(--font-mono);font-size:.82rem;color:var(--metal);margin-top:3px}
-.layer-body .when{font-family:var(--font-mono);font-size:.78rem;color:var(--text-faint);white-space:nowrap}
-.layer-tag{display:inline-block;margin:12px 0 10px;font-family:var(--font-mono);font-size:.66rem;letter-spacing:.1em;
+.layer-body{margin-top:18px;display:flex;flex-direction:column;flex:1;min-width:0}
+.layer-head{text-align:center}
+.layer-body .company{font-family:var(--font-display);font-weight:600;font-size:1.3rem;letter-spacing:-.02em;line-height:1.1}
+.layer-body .role{font-family:var(--font-mono);font-size:.78rem;color:var(--metal);margin-top:4px}
+.layer-body .when{font-family:var(--font-mono);font-size:.74rem;color:var(--text-faint);margin-top:4px}
+.layer-tag{align-self:center;margin:12px 0;font-family:var(--font-mono);font-size:.64rem;letter-spacing:.1em;
   text-transform:uppercase;color:var(--metal);border:1px solid color-mix(in srgb,var(--metal) 38%,var(--line));
   background:color-mix(in srgb,var(--metal) 11%,transparent);padding:4px 11px;border-radius:999px}
-.layer-desc{color:var(--text-dim);font-size:.95rem;max-width:64ch;margin-bottom:18px}
+.layer-desc{color:var(--text-dim);font-size:.9rem;line-height:1.55;margin-bottom:16px}
 
-/* input → conduit → output strip */
-.pipeline{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px;
-  border:1px solid var(--line);border-radius:14px;padding:16px 18px;
+/* input → conduit → output (flows top → bottom inside the card) */
+.pipeline{margin-top:auto;display:flex;flex-direction:column;gap:11px;
+  border:1px solid var(--line);border-radius:14px;padding:14px;
   background:color-mix(in srgb,var(--surface) 55%,transparent)}
-.io-label{display:block;font-family:var(--font-mono);font-size:.65rem;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--text-faint);margin-bottom:9px}
-.io-output{text-align:right}
+.io-label{display:block;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--text-faint);margin-bottom:8px}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
-.io-output .chips{justify-content:flex-end}
-.chip{font-family:var(--font-mono);font-size:.7rem;color:var(--text-dim);border:1px solid var(--line);
+.chip{font-family:var(--font-mono);font-size:.68rem;color:var(--text-dim);border:1px solid var(--line);
   background:var(--bg-soft);padding:4px 8px;border-radius:6px}
-.conduit{position:relative;height:2px;min-width:54px;align-self:center;border-radius:2px;
+.conduit{position:relative;width:2px;height:24px;align-self:center;border-radius:2px;
   background:var(--line-strong);overflow:hidden}
-.conduit::after{content:"";position:absolute;top:0;left:0;height:100%;width:45%;
-  background:linear-gradient(90deg,transparent,var(--metal),transparent);
+.conduit::after{content:"";position:absolute;left:0;top:0;width:100%;height:45%;
+  background:linear-gradient(180deg,transparent,var(--metal),transparent);
   animation:convey 1.9s linear infinite}
-@keyframes convey{0%{transform:translateX(-120%)}100%{transform:translateX(360%)}}
-.out-card{display:inline-block;text-align:left;border:1px solid color-mix(in srgb,var(--metal) 45%,var(--line));
+@keyframes convey{0%{transform:translateY(-120%)}100%{transform:translateY(360%)}}
+.out-card{border:1px solid color-mix(in srgb,var(--metal) 45%,var(--line));
   background:var(--bg-soft);border-radius:10px;padding:10px 12px;
   animation:outPulse 6s ease-out var(--mdelay) infinite}
 .out-title{font-weight:600;font-size:.9rem;color:var(--text);line-height:1.25}
@@ -259,15 +261,19 @@ nav{
 .reveal.in .medal{opacity:1;transform:none;transition:opacity .5s var(--ri),transform .5s var(--ri)}
 .reveal.in .layer-body{opacity:1;transform:none;transition:opacity .6s var(--ri) ease,transform .6s var(--ri) ease}
 
-@media(max-width:680px){
-  .medallion{grid-template-columns:52px 1fr;gap:32px 16px}
-  .medallion::before{left:25px}
-  .spine-packet{left:20px}
-  .medal{width:52px;height:52px}
+/* narrow screens: collapse to a vertical top → bottom timeline */
+@media(max-width:880px){
+  .medallion{flex-direction:column;gap:34px;align-items:stretch}
+  .medallion::before{top:6px;bottom:6px;left:25px;right:auto;width:2px;height:auto;
+    background:linear-gradient(180deg,transparent,var(--line-strong) 7%,var(--line-strong) 93%,transparent)}
+  .spine-packet{top:0;left:20px;animation:descend 6s cubic-bezier(.5,0,.5,1) infinite}
+  .layer{flex-direction:row;align-items:start;gap:0 16px}
+  .medal{align-self:start;width:52px;height:52px}
   .medal b{font-size:.5rem}
-  .pipeline{grid-template-columns:1fr}
-  .io-output,.io-output .chips{text-align:left;justify-content:flex-start}
-  .conduit{width:100%;min-width:0;height:2px;margin:2px 0}
+  .layer-body{margin-top:0;flex:1}
+  .layer-head{text-align:left}
+  .layer-tag{align-self:flex-start}
+  .layer-desc{font-size:.94rem}
 }
 
 @media (prefers-reduced-motion:reduce){
