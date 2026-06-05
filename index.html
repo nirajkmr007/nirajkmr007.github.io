@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Niraj Kumar — Data / AI Engineer</title>
-<meta name="description" content="Niraj Kumar — Data / AI Engineer based in Bangalore. Building ML-powered applications, prediction APIs, and clean Python systems." />
+<title>Niraj Kumar — Lead Data Engineer</title>
+<meta name="description" content="Niraj Kumar — Lead Data Engineer in Bangalore with 10+ years building scalable, cloud-native data platforms for renewable energy. PySpark, Databricks, Snowflake, AWS & Azure." />
 
 <!-- ======================================================================
      OPEN GRAPH (how the link looks when shared on LinkedIn / WhatsApp etc.)
      ====================================================================== -->
-<meta property="og:title" content="Niraj Kumar — Data / AI Engineer" />
-<meta property="og:description" content="Building ML-powered applications, prediction APIs, and clean Python systems." />
+<meta property="og:title" content="Niraj Kumar — Lead Data Engineer" />
+<meta property="og:description" content="10+ years building scalable, cloud-native data platforms for renewable energy — PySpark, Databricks, Snowflake, AWS & Azure." />
 <meta property="og:type" content="profile" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -152,7 +152,7 @@ nav{
 .marquee{border-block:1px solid var(--line);padding:26px 0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
 .marquee-track{display:flex;gap:54px;width:max-content;animation:scroll 32s linear infinite}
 .marquee:hover .marquee-track{animation-play-state:paused}
-.marquee img{height:38px;width:38px;opacity:.72;transition:opacity .2s}
+.marquee img{height:38px;width:auto;opacity:.72;transition:opacity .2s}
 :root[data-theme="light"] .marquee img{filter:none}
 .marquee img:hover{opacity:1}
 @keyframes scroll{to{transform:translateX(-50%)}}
@@ -191,6 +191,29 @@ nav{
   .proj{grid-template-columns:1fr}
   .proj-links{flex-direction:row;flex-wrap:wrap;align-items:flex-start}
 }
+
+/* role/team meta on the right of a project card */
+.proj-meta{display:flex;flex-direction:column;gap:6px;align-items:flex-end;text-align:right}
+.proj-meta .role{font-family:var(--font-mono);font-size:.78rem;color:var(--accent)}
+.proj-meta .team{font-family:var(--font-mono);font-size:.74rem;color:var(--text-faint)}
+@media(max-width:680px){.proj-meta{align-items:flex-start;text-align:left}}
+
+/* =======================================================================
+   7b. EXPERIENCE TIMELINE
+   ======================================================================= */
+.timeline{display:grid;gap:0;position:relative}
+.xp{
+  display:grid;grid-template-columns:200px 1fr;gap:8px 34px;
+  padding:28px 0;border-top:1px solid var(--line);position:relative;
+}
+.xp:last-child{border-bottom:1px solid var(--line)}
+.xp .when{font-family:var(--font-mono);font-size:.8rem;color:var(--text-faint);padding-top:4px}
+.xp .company{font-family:var(--font-display);font-weight:600;font-size:1.35rem;letter-spacing:-.02em;margin-bottom:2px}
+.xp .role{font-family:var(--font-mono);font-size:.82rem;color:var(--accent);margin-bottom:12px}
+.xp p{color:var(--text-dim);font-size:.97rem;margin-bottom:14px;max-width:64ch}
+.xp .xtags{display:flex;flex-wrap:wrap;gap:7px}
+.xp .xtags span{font-family:var(--font-mono);font-size:.72rem;color:var(--text-faint);border:1px solid var(--line);padding:4px 9px;border-radius:6px}
+@media(max-width:680px){.xp{grid-template-columns:1fr;gap:4px}.xp .when{padding-top:0;margin-bottom:8px}}
 
 /* =======================================================================
    8. SKILLS
@@ -244,10 +267,11 @@ footer{border-top:1px solid var(--line);padding:34px 0;color:var(--text-faint);f
   <div class="nav-in">
     <a href="#top" class="brand">Niraj<b>.</b></a>
     <div class="nav-links">
-      <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#work">Projects</a>
       <a href="#skills">Skills</a>
       <a href="#contact">Contact</a>
-      <a href="https://github.com/nirajkmr007" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="https://www.linkedin.com/in/niraj-kumar-0530324a/" target="_blank" rel="noopener">LinkedIn ↗</a>
       <button class="icon-btn" id="themeBtn" aria-label="Toggle theme">☾</button>
       <a href="#contact" class="cta cta-link">Hire me</a>
     </div>
@@ -256,15 +280,16 @@ footer{border-top:1px solid var(--line);padding:34px 0;color:var(--text-faint);f
 
 <!-- ============================ HERO ============================ -->
 <header class="hero wrap" id="top">
-  <div class="eyebrow">Data / AI Engineer · Bangalore, India</div>
+  <div class="eyebrow">Lead Data Engineer · Bangalore, India</div>
   <h1>Niraj <span class="accent">Kumar.</span></h1>
-  <p class="hero-lead">I build <strong>machine-learning powered applications</strong> — training models, serving them through clean APIs, and wrapping them in usable interfaces. Focused on turning data into shipped, working products.</p>
+  <p class="hero-lead">I build <strong>scalable, cloud-native data platforms</strong> for the renewable-energy sector — turning terabytes of wind-turbine sensor data into real-time analytics, forecasting, and decision intelligence. 10+ years designing robust data architectures, end to end.</p>
   <div class="tags">
-    <span class="tag">Machine Learning</span>
-    <span class="tag">Python</span>
-    <span class="tag">REST APIs</span>
-    <span class="tag">Data Engineering</span>
-    <span class="tag">Model Deployment</span>
+    <span class="tag">PySpark</span>
+    <span class="tag">Databricks</span>
+    <span class="tag">Snowflake</span>
+    <span class="tag">AWS</span>
+    <span class="tag">Azure</span>
+    <span class="tag">Spark Streaming</span>
   </div>
   <div class="hero-cta">
     <a href="#work" class="btn-solid">View my work →</a>
@@ -278,14 +303,25 @@ footer{border-top:1px solid var(--line);padding:34px 0;color:var(--text-faint);f
   <div class="marquee-track" id="stackTrack"><!-- filled by JS --></div>
 </div>
 
+<!-- ============================ EXPERIENCE ============================ -->
+<section class="wrap reveal" id="experience">
+  <div class="sec-head">
+    <div>
+      <div class="idx">// 01 — career</div>
+      <h2>Experience.</h2>
+    </div>
+    <a href="https://www.linkedin.com/in/niraj-kumar-0530324a/" target="_blank" rel="noopener">Full history on LinkedIn ↗</a>
+  </div>
+  <div class="timeline" id="xpList"><!-- filled by JS --></div>
+</section>
+
 <!-- ============================ WORK ============================ -->
 <section class="wrap reveal" id="work">
   <div class="sec-head">
     <div>
-      <div class="idx">// 01 — selected work</div>
+      <div class="idx">// 02 — selected work</div>
       <h2>Projects.</h2>
     </div>
-    <a href="https://github.com/nirajkmr007?tab=repositories" target="_blank" rel="noopener">All repositories ↗</a>
   </div>
   <div class="projects" id="projectList"><!-- filled by JS --></div>
 </section>
@@ -294,7 +330,7 @@ footer{border-top:1px solid var(--line);padding:34px 0;color:var(--text-faint);f
 <section class="wrap reveal" id="skills">
   <div class="sec-head">
     <div>
-      <div class="idx">// 02 — toolkit</div>
+      <div class="idx">// 03 — toolkit</div>
       <h2>Skills.</h2>
     </div>
   </div>
@@ -305,13 +341,14 @@ footer{border-top:1px solid var(--line);padding:34px 0;color:var(--text-faint);f
 <section class="wrap reveal" id="contact">
   <div class="contact-grid">
     <div>
-      <div class="idx" style="font-family:var(--font-mono);color:var(--accent);font-size:.85rem;margin-bottom:6px">// 03 — let's talk</div>
-      <h2>Open to Data&nbsp;/&nbsp;AI roles.</h2>
-      <p>Looking for full-time roles, internships, or interesting ML problems to solve. If you're hiring or want to collaborate, the fastest way to reach me is below.</p>
+      <div class="idx" style="font-family:var(--font-mono);color:var(--accent);font-size:.85rem;margin-bottom:6px">// 04 — let's talk</div>
+      <h2>Open to Lead&nbsp;/&nbsp;Senior Data Engineering roles.</h2>
+      <p>I'm interested in data-platform, data-architecture, and data-engineering leadership roles — especially in renewable energy or other large-scale, real-time data domains. The fastest way to reach me is below.</p>
       <div class="contact-links">
-        <a href="mailto:CHANGE_ME@email.com">✉  CHANGE_ME@email.com</a>
+        <a href="mailto:nirajkmr007@gmail.com">✉  nirajkmr007@gmail.com</a>
+        <a href="https://www.linkedin.com/in/niraj-kumar-0530324a/" target="_blank" rel="noopener">in  linkedin.com/in/niraj-kumar</a>
         <a href="https://github.com/nirajkmr007" target="_blank" rel="noopener">⌥  github.com/nirajkmr007</a>
-        <a href="#" data-edit="linkedin" target="_blank" rel="noopener">in  Add your LinkedIn URL</a>
+        <a href="https://stackoverflow.com/users/8581421/" target="_blank" rel="noopener">⧉  stackoverflow.com/users/8581421</a>
       </div>
     </div>
     <!-- This form opens the visitor's email app pre-filled (works on static hosting, no backend).
@@ -330,9 +367,10 @@ footer{border-top:1px solid var(--line);padding:34px 0;color:var(--text-faint);f
   <div class="wrap foot-in">
     <span>© <span id="yr"></span> Niraj Kumar · Built &amp; hosted on GitHub Pages</span>
     <span>
+      <a href="https://www.linkedin.com/in/niraj-kumar-0530324a/" target="_blank" rel="noopener">LinkedIn</a> ·
       <a href="https://github.com/nirajkmr007" target="_blank" rel="noopener">GitHub</a> ·
-      <a href="#" data-edit="linkedin" target="_blank" rel="noopener">LinkedIn</a> ·
-      <a href="mailto:CHANGE_ME@email.com">Email</a>
+      <a href="https://stackoverflow.com/users/8581421/" target="_blank" rel="noopener">Stack Overflow</a> ·
+      <a href="mailto:nirajkmr007@gmail.com">Email</a>
     </span>
   </div>
 </footer>
@@ -345,72 +383,107 @@ footer{border-top:1px solid var(--line);padding:34px 0;color:var(--text-faint);f
    fill it in, save. The page rebuilds itself. No HTML editing needed.
    ======================================================================= */
 
-/* ---- 1. PROJECTS (newest first) ----------------------------------- */
+/* ---- 1. EXPERIENCE (newest first) --------------------------------- */
+const EXPERIENCE = [
+  {
+    when: "Jan 2024 – Present",
+    company: "Vestas",
+    role: "Senior Data Engineer",
+    desc: "Building real-time and batch data platforms for wind-turbine condition monitoring on Azure Databricks — ingesting terabytes of turbine telemetry into clean, analytics-ready datasets in Snowflake for reliability engineers and data scientists.",
+    stack: ["PySpark", "Spark Streaming", "Databricks", "Azure DevOps", "Data Factory", "Snowflake"]
+  },
+  {
+    when: "Jun 2019 – Dec 2023",
+    company: "Utopus Insights",
+    role: "Senior Data Engineer I → Data Engineer",
+    desc: "Designed scalable streaming and batch pipelines for renewable-energy analytics on AWS and Databricks, powering wind & solar power-forecasting products for asset owners, operators, and power traders.",
+    stack: ["PySpark", "Spark Streaming", "Databricks", "Kinesis", "Lambda", "Step Functions", "EventBridge", "API Gateway"]
+  },
+  {
+    when: "Dec 2017 – Jun 2019",
+    company: "Brillio",
+    role: "Senior Engineer",
+    desc: "Built large-scale data-processing pipelines on AWS for real-estate and analytics clients including Realtor.com — from data migration frameworks to recommendation data products.",
+    stack: ["PySpark", "Python", "EMR", "Athena", "S3", "Lambda", "Jenkins"]
+  },
+  {
+    when: "Jun 2014 – Nov 2017",
+    company: "Marlabs",
+    role: "Software Engineer",
+    desc: "Delivered data-warehousing, big-data, and IoT solutions across airline, education, and smart-mobility domains — Hadoop pipelines, ETL, and an end-to-end IoT smart-parking system.",
+    stack: ["AWS", "Hadoop", "Data Warehousing", "SSIS", "SSRS", "IoT", "Talend"]
+  }
+];
+
+/* ---- 2. PROJECTS (selected, flagship work) ------------------------ */
 const PROJECTS = [
   {
-    when: "2024",
-    title: "Salary Predictor",
-    /* Outcome-first: say what it DOES and that it's end-to-end, not "an example of X" */
-    desc: "End-to-end ML web app that predicts salaries from a trained linear-regression model — served through a REST API and wrapped in an interactive web UI. Covers the full loop: data → model → API → interface.",
-    tags: ["Python", "scikit-learn", "REST API", "HTML/JS"],
-    repo: "https://github.com/nirajkmr007/SalaryPredictor",
-    demo: ""              /* add a live URL here if you deploy it */
+    when: "2024 – Present · Vestas",
+    title: "Condition Monitoring Data Product",
+    desc: "End-to-end data platform on Azure Databricks for wind-turbine condition monitoring. High-throughput pipelines ingest raw turbine telemetry and event data, then standardize, quality-check, and curate it — delivering analytics-ready datasets into Snowflake through a single unified data product. Fully orchestrated with version control and CI/CD on Azure DevOps.",
+    tags: ["Databricks", "PySpark", "Azure DevOps", "Snowflake"],
+    role: "Tech Lead",
+    team: "Team of 12"
   },
   {
-    when: "2024",
-    title: "Python Project Template",
-    /* Reframed as engineering maturity, NOT "a template repo" */
-    desc: "A reusable, production-style scaffold for new Python projects — packaging, structure, and tooling baked in so every project starts clean and consistent. Reflects how I set up real, maintainable codebases.",
-    tags: ["Python", "Jinja", "Project Tooling", "Packaging"],
-    repo: "https://github.com/nirajkmr007/pyproject-template",
-    demo: ""
+    when: "Utopus Insights · Renewable Energy",
+    title: "Scipher FX — Power Forecasting Platform",
+    desc: "Comprehensive wind & solar power-forecasting platform helping renewable asset owners, operators, and power traders make informed decisions. Designed the data-lake architecture and core data models, built scalable pipelines from scratch, and led development of key product modules.",
+    tags: ["Data Lake", "PySpark", "AWS", "Forecasting"],
+    role: "Tech Lead / SDE I",
+    team: "Team of 8"
   },
   {
-    when: "Ongoing",
-    title: "Machine Learning Practicum",
-    /* Honest framing of the learning repos — "from scratch" signals fundamentals */
-    desc: "Implementations of classic machine-learning algorithms and problems worked from first principles — building intuition for the maths behind the models, not just calling library functions.",
-    tags: ["Python", "Jupyter", "NumPy", "ML Fundamentals"],
-    repo: "https://github.com/nirajkmr007/ML",
-    demo: ""
+    when: "Brillio · Realtor.com",
+    title: "Similar-Homes Recommendation Engine",
+    desc: "Recommendation engine for Realtor.com's listings, surfacing comparable homes to drive engagement and agent leads. Built the data pipelines powering home-similarity at scale across millions of property records.",
+    tags: ["PySpark", "AWS", "Recommendations", "Real Estate"],
+    role: "Developer",
+    team: "Team of 9"
   }
-  /* ↓↓↓ ADD YOUR NEXT PROJECT HERE — copy the block above, change the fields ↓↓↓
-  ,{
-    when: "2026",
-    title: "Your next project",
-    desc: "One sentence on what it does and the result. Lead with the outcome.",
-    tags: ["Tag", "Tag"],
-    repo: "https://github.com/nirajkmr007/your-repo",
-    demo: ""
-  }
-  */
 ];
 
-/* ---- 2. STATS (keep these honest — no fake numbers) --------------- */
+/* ---- 3. STATS (honest — straight from the résumé) ----------------- */
 const STATS = [
-  { num: PROJECTS.length, lbl: "featured projects" },
-  { num: "10", lbl: "public repositories" },
-  { num: "Python", lbl: "primary stack" },
+  { num: "10+",     lbl: "years in data engineering" },
+  { num: "8 yrs",   lbl: "PySpark · Databricks" },
+  { num: "SnowPro", lbl: "certified associate" },
 ];
 
-/* ---- 3. SKILLS ---------------------------------------------------- */
+/* ---- 4. SKILLS ---------------------------------------------------- */
 const SKILLS = [
-  { group: "Languages",        items: ["Python", "C#", "SQL", "JavaScript"] },
-  { group: "ML & Data",        items: ["scikit-learn", "Pandas", "NumPy", "Jupyter", "Regression"] },
-  { group: "Building & Serving", items: ["REST APIs", "Flask", "HTML/CSS", "Git"] },
+  { group: "Big Data & Processing", items: ["PySpark", "Spark Streaming", "Databricks", "Hadoop", "Feature Engineering"] },
+  { group: "Cloud — AWS",           items: ["Kinesis", "Lambda", "Step Functions", "EventBridge", "API Gateway", "EMR", "Athena", "S3"] },
+  { group: "Cloud — Azure",         items: ["Azure Databricks", "Azure DevOps", "Data Factory"] },
+  { group: "Storage & Warehouse",   items: ["Snowflake", "Data Lake", "SQL", "PostgreSQL"] },
+  { group: "Languages",             items: ["Python", "SQL", "Lua"] },
+  { group: "Engineering & Practices", items: ["Microservices", "Event-Driven Design", "REST APIs", "CI/CD", "TDD", "Clean Code", "Git", "Agile/Scrum"] },
+  { group: "Certifications & Education", items: ["SnowPro Associate", "B.Tech, CSE (2013)"] },
 ];
 
-/* ---- 4. TECH STACK ICONS (devicon CDN) ---------------------------- */
+/* ---- 5. TECH STACK ICONS (devicon CDN) --------------------------- */
 const STACK = [
-  "python/python-original","pandas/pandas-original","numpy/numpy-original",
-  "jupyter/jupyter-original","scikitlearn/scikitlearn-original","flask/flask-original",
-  "csharp/csharp-original","javascript/javascript-original","html5/html5-original","git/git-original"
+  "apachespark/apachespark-original","python/python-original","pandas/pandas-original",
+  "numpy/numpy-original","amazonwebservices/amazonwebservices-original-wordmark","azure/azure-original",
+  "postgresql/postgresql-original","apachehadoop/apachehadoop-original","jenkins/jenkins-original","git/git-original"
 ];
 
 /* =======================================================================
    ████  RENDER LOGIC — you usually don't need to touch below here  ████
    ======================================================================= */
 const $ = (s)=>document.querySelector(s);
+
+/* experience timeline */
+$("#xpList").innerHTML = EXPERIENCE.map(x=>`
+  <article class="xp">
+    <div class="when">${x.when}</div>
+    <div>
+      <div class="company">${x.company}</div>
+      <div class="role">${x.role}</div>
+      <p>${x.desc}</p>
+      <div class="xtags">${x.stack.map(t=>`<span>${t}</span>`).join("")}</div>
+    </div>
+  </article>`).join("");
 
 /* projects */
 $("#projectList").innerHTML = PROJECTS.map(p=>`
@@ -421,9 +494,9 @@ $("#projectList").innerHTML = PROJECTS.map(p=>`
       <p>${p.desc}</p>
       <div class="ptags">${p.tags.map(t=>`<span>${t}</span>`).join("")}</div>
     </div>
-    <div class="proj-links">
-      ${p.repo ? `<a class="primary" href="${p.repo}" target="_blank" rel="noopener">Code ↗</a>` : ""}
-      ${p.demo ? `<a href="${p.demo}" target="_blank" rel="noopener">Live demo ↗</a>` : ""}
+    <div class="proj-meta">
+      ${p.role ? `<span class="role">${p.role}</span>` : ""}
+      ${p.team ? `<span class="team">${p.team}</span>` : ""}
     </div>
   </article>`).join("");
 
@@ -460,7 +533,7 @@ tBtn.addEventListener("click", ()=> applyTheme(root.getAttribute("data-theme")==
 $("#contactForm").addEventListener("submit", (e)=>{
   e.preventDefault();
   const name = $("#cf-name").value, email = $("#cf-email").value, msg = $("#cf-msg").value;
-  const to = "CHANGE_ME@email.com";   // <-- put your real email here too
+  const to = "nirajkmr007@gmail.com";
   const subject = encodeURIComponent(`Portfolio enquiry from ${name}`);
   const body = encodeURIComponent(`${msg}\n\n— ${name} (${email})`);
   window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
