@@ -4,6 +4,9 @@
    You usually don't need to touch this file.
    ======================================================================= */
 const $ = (s)=>document.querySelector(s);
+/* safe setters — never throw if an element is missing (e.g. cached/old HTML) */
+const setHTML = (sel, html)=>{ const el = $(sel); if(el) el.innerHTML = html; };
+const setText = (sel, txt)=>{ const el = $(sel); if(el) el.textContent = txt; };
 
 /* experience as a medallion architecture (raw → silver → gold → platinum)
    Skills flow IN as input chips, the layer refines them, a data product flows OUT.
@@ -50,7 +53,7 @@ const MEDAL_CYCLE = 6; /* seconds — must match the keyframe durations in style
 })();
 
 /* projects */
-$("#projectList").innerHTML = PROJECTS.map(p=>`
+setHTML("#projectList", PROJECTS.map(p=>`
   <article class="proj">
     <div>
       <div class="when">${p.when}</div>
@@ -62,24 +65,23 @@ $("#projectList").innerHTML = PROJECTS.map(p=>`
       ${p.role ? `<span class="role">${p.role}</span>` : ""}
       ${p.team ? `<span class="team">${p.team}</span>` : ""}
     </div>
-  </article>`).join("");
+  </article>`).join(""));
 
 /* stats */
-$("#statStrip").innerHTML = STATS.map(s=>`
-  <div class="stat"><div class="num">${s.num}</div><div class="lbl">${s.lbl}</div></div>`).join("");
+setHTML("#statStrip", STATS.map(s=>`
+  <div class="stat"><div class="num">${s.num}</div><div class="lbl">${s.lbl}</div></div>`).join(""));
 
 /* skills */
-$("#skillList").innerHTML = SKILLS.map(s=>`
+setHTML("#skillList", SKILLS.map(s=>`
   <div class="skill-card"><h4>${s.group}</h4>
-    <ul>${s.items.map(i=>`<li>${i}</li>`).join("")}</ul></div>`).join("");
+    <ul>${s.items.map(i=>`<li>${i}</li>`).join("")}</ul></div>`).join(""));
 
 /* stack marquee (doubled for seamless loop) */
-const icons = STACK.concat(STACK).map(s=>
-  `<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${s}.svg" alt="" loading="lazy">`).join("");
-$("#stackTrack").innerHTML = icons;
+setHTML("#stackTrack", STACK.concat(STACK).map(s=>
+  `<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${s}.svg" alt="" loading="lazy">`).join(""));
 
 /* year */
-$("#yr").textContent = new Date().getFullYear();
+setText("#yr", new Date().getFullYear());
 
 /* ---- theme toggle (remembers choice; degrades gracefully) -------- */
 const root = document.documentElement, tBtn = $("#themeBtn");
@@ -87,14 +89,15 @@ let theme = "dark";
 try { theme = localStorage.getItem("theme") || "dark"; } catch(e){}
 function applyTheme(t){
   root.setAttribute("data-theme", t);
-  tBtn.textContent = t === "dark" ? "☾" : "☀";
+  if(tBtn) tBtn.textContent = t === "dark" ? "☾" : "☀";
   try { localStorage.setItem("theme", t); } catch(e){}
 }
 applyTheme(theme);
-tBtn.addEventListener("click", ()=> applyTheme(root.getAttribute("data-theme")==="dark"?"light":"dark"));
+if(tBtn) tBtn.addEventListener("click", ()=> applyTheme(root.getAttribute("data-theme")==="dark"?"light":"dark"));
 
 /* ---- contact form → opens email app (no backend needed) ---------- */
-$("#contactForm").addEventListener("submit", (e)=>{
+const contactForm = $("#contactForm");
+if(contactForm) contactForm.addEventListener("submit", (e)=>{
   e.preventDefault();
   const name = $("#cf-name").value, email = $("#cf-email").value, msg = $("#cf-msg").value;
   const to = "nirajkmr007@gmail.com";
