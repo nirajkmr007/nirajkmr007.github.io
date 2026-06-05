@@ -155,9 +155,21 @@ setHTML("#statStrip", STATS.map(s=>`
     { threshold:.04 }).observe(host);
 })();
 
-/* stack marquee (doubled for seamless loop) */
-setHTML("#stackTrack", STACK.concat(STACK).map(s=>
-  `<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${s}.svg" alt="" loading="lazy">`).join(""));
+/* tech stack as a data pipeline: ingest → process → store → orchestrate.
+   Logos are stations on a wire; a packet flows along it and each station
+   pulses (staggered via --td) as the data passes through. */
+(function renderPipeline(){
+  const host = $("#pipelineBand"); if(!host) return;
+  const cdn = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/";
+  let t = 0;
+  const stages = PIPELINE.map((st,si)=>{
+    const tiles = st.icons.map(ic=>
+      `<span class="tile" style="--td:${(t++ * 0.5).toFixed(1)}s"><img src="${cdn}${ic}.svg" alt="" loading="lazy"></span>`).join("");
+    const arrow = si < PIPELINE.length - 1 ? `<span class="stage-arrow" aria-hidden="true">▸</span>` : "";
+    return `<div class="stage"><span class="slabel">${st.stage}</span><div class="logos">${tiles}</div></div>${arrow}`;
+  }).join("");
+  host.innerHTML = `<div class="wire" aria-hidden="true"></div><div class="stages">${stages}</div>`;
+})();
 
 /* year */
 setText("#yr", new Date().getFullYear());

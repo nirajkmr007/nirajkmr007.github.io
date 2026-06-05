@@ -127,15 +127,40 @@ nav{
 .stat .lbl{font-size:.82rem;color:var(--text-faint);font-family:var(--font-mono)}
 
 /* =======================================================================
-   5. MARQUEE (tech stack)
+   5. PIPELINE BAND  — the stack read as a data pipeline:
+      ingest → process → store → orchestrate, with data flowing through.
    ======================================================================= */
-.marquee{border-block:1px solid var(--line);padding:26px 0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
-.marquee-track{display:flex;gap:54px;width:max-content;animation:scroll 32s linear infinite}
-.marquee:hover .marquee-track{animation-play-state:paused}
-.marquee img{height:38px;width:auto;opacity:.72;transition:opacity .2s}
-:root[data-theme="light"] .marquee img{filter:none}
-.marquee img:hover{opacity:1}
-@keyframes scroll{to{transform:translateX(-50%)}}
+.pipeline-band{position:relative;border-block:1px solid var(--line);padding:24px 0 20px;overflow:hidden;
+  background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 4%,transparent),transparent 26%)}
+.pipeline-in{max-width:var(--maxw);margin:0 auto;padding:0 30px;position:relative}
+/* the conduit the data flows along, behind the logo stations */
+.wire{position:absolute;left:30px;right:30px;top:53px;height:2px;background:var(--line-strong);border-radius:2px;overflow:hidden}
+.wire::after{content:"";position:absolute;top:0;left:0;height:100%;width:20%;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);animation:dataflow 3.2s linear infinite}
+@keyframes dataflow{0%{transform:translateX(-120%)}100%{transform:translateX(560%)}}
+.stages{display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:1;gap:10px}
+.stage{display:flex;flex-direction:column;align-items:center;gap:13px;flex:1 1 0;min-width:0}
+.stage .slabel{font-family:var(--font-mono);font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--text-faint)}
+.stage .logos{display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center}
+.tile{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:var(--surface);
+  border:1px solid var(--line-strong);box-shadow:0 0 0 5px var(--bg);
+  animation:tilePass 6s ease-out var(--td,0s) infinite}
+.tile img{width:auto;height:auto;max-width:28px;max-height:25px;opacity:.85}
+:root[data-theme="light"] .tile img{filter:none}
+@keyframes tilePass{
+  0%,20%,100%{border-color:var(--line-strong);box-shadow:0 0 0 5px var(--bg),0 0 0 0 transparent}
+  9%{border-color:var(--accent);box-shadow:0 0 0 5px var(--bg),0 0 20px 2px color-mix(in srgb,var(--accent) 55%,transparent)}
+}
+.stage-arrow{flex:none;align-self:flex-start;margin-top:40px;color:var(--text-faint);font-family:var(--font-mono);font-size:.85rem}
+
+@media(max-width:760px){
+  .pipeline-band{overflow-x:auto;overflow-y:hidden}
+  .pipeline-in{min-width:660px}
+}
+@media (prefers-reduced-motion:reduce){
+  .wire::after{display:none}
+  .tile{animation:none}
+}
 
 /* =======================================================================
    6. SECTION HEADERS

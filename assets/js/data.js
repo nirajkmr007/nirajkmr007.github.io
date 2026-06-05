@@ -109,9 +109,12 @@ const SKILLS = [
   { group: "Certifications & Education", items: ["SnowPro Associate", "B.Tech, CSE (2013)"] },
 ];
 
-/* ---- 5. TECH STACK ICONS (devicon CDN) --------------------------- */
-const STACK = [
-  "apachespark/apachespark-original","python/python-original","pandas/pandas-original",
-  "numpy/numpy-original","amazonwebservices/amazonwebservices-original-wordmark","azure/azure-original",
-  "postgresql/postgresql-original","apachehadoop/apachehadoop-original","jenkins/jenkins-original","git/git-original"
+/* ---- 5. TECH STACK as a DATA PIPELINE (devicon CDN icon paths) ----
+   The stack reads as the path data takes: ingest → process → store →
+   orchestrate. Every icon from the old marquee is preserved here.        */
+const PIPELINE = [
+  { stage: "Ingest",      icons: ["python/python-original", "amazonwebservices/amazonwebservices-original-wordmark"] },
+  { stage: "Process",     icons: ["apachespark/apachespark-original", "pandas/pandas-original", "numpy/numpy-original"] },
+  { stage: "Store",       icons: ["postgresql/postgresql-original", "apachehadoop/apachehadoop-original"] },
+  { stage: "Orchestrate", icons: ["azure/azure-original", "jenkins/jenkins-original", "git/git-original"] },
 ];
