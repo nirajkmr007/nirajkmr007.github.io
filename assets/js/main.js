@@ -170,6 +170,115 @@ setHTML("#certBand", CERTS.map(c=>{
     : `<div class="cert">${seal}${text}</div>`;
 }).join(""));
 
+/* hero project crown — a draggable 3D ring of pinned repos.
+   Cards are billboards projected onto a circle: front card is largest/clearest,
+   back cards recede and dim. Drag (mouse/touch) rotates in any direction;
+   it carries momentum and idles with a slow auto-spin. Click opens the repo. */
+(function projectCrown(){
+  const stage = $("#projectRing");
+  if(!stage || typeof PINNED === "undefined") return;
+  const SVGNS = "http://www.w3.org/2000/svg";
+  const svg = stage.querySelector(".mesh-lines");
+
+  const cards = PINNED.map(p=>{
+    const a = document.createElement("a");
+    a.className = "pcard";
+    a.href = p.url; a.target = "_blank"; a.rel = "noopener";
+    a.setAttribute("aria-label", `${p.name} on GitHub`);
+    a.innerHTML =
+      `<span class="pcard-top"><span class="pcard-lang">${p.lang||"Repo"}</span><span class="pcard-arrow">↗</span></span>
+       <span class="pcard-name">${p.name}</span>
+       <span class="pcard-desc">${p.desc||""}</span>`;
+    stage.appendChild(a);
+    return a;
+  });
+  const N = cards.length;
+
+  const edges = [], spokes = [];
+  for(let i=0;i<N;i++){
+    const e = document.createElementNS(SVGNS,"line"); e.setAttribute("class","mesh-edge"); svg.appendChild(e); edges.push(e);
+    const s = document.createElementNS(SVGNS,"line"); s.setAttribute("class","mesh-spoke"); svg.appendChild(s); spokes.push(s);
+  }
+
+  const reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let ry = 0, rx = 0.42, vy = 0, vx = 0;
+  let dragging = false, lastX = 0, lastY = 0, moved = 0;
+  let W = 0, H = 0, cx = 0, cy = 0, R = 140, D = 340, frontIdx = -1, raf = null, running = false;
+
+  function measure(){
+    W = stage.clientWidth; H = stage.clientHeight; cx = W/2; cy = H/2;
+    R = Math.min(W, H) * 0.44; D = R * 2.5;
+    svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  }
+
+  function place(){
+    let maxZ = -1e9, fi = -1;
+    const px = [], py = [];
+    for(let i=0;i<N;i++){
+      const a = (i/N)*Math.PI*2 + ry;
+      const x = Math.sin(a)*R, z0 = Math.cos(a)*R;
+      const y =  -z0*Math.sin(rx);          /* tilt around X */
+      const z =   z0*Math.cos(rx);
+      const s = D/(D - z);
+      const sx = cx + x*s, sy = cy + y*s;
+      px[i] = sx; py[i] = sy;
+      const c = cards[i];
+      c.style.transform = `translate(${sx}px,${sy}px) translate(-50%,-50%) scale(${s.toFixed(3)})`;
+      c.style.zIndex = Math.round(500 + z);
+      c.style.opacity = (0.4 + 0.6*((z + R)/(2*R))).toFixed(2);
+      if(z > maxZ){ maxZ = z; fi = i; }
+    }
+    if(fi !== frontIdx){
+      if(frontIdx >= 0) cards[frontIdx].classList.remove("is-front");
+      cards[fi].classList.add("is-front"); frontIdx = fi;
+    }
+    for(let i=0;i<N;i++){
+      const j = (i+1)%N;
+      edges[i].setAttribute("x1",px[i]); edges[i].setAttribute("y1",py[i]);
+      edges[i].setAttribute("x2",px[j]); edges[i].setAttribute("y2",py[j]);
+      spokes[i].setAttribute("x1",cx);   spokes[i].setAttribute("y1",cy);
+      spokes[i].setAttribute("x2",px[i]); spokes[i].setAttribute("y2",py[i]);
+    }
+  }
+
+  function frame(){
+    if(!dragging){
+      ry += vy; rx += vx;
+      vy *= 0.94; vx *= 0.94;
+      if(Math.abs(vx) < 0.0006) vx = 0;
+      if(Math.abs(vy) < 0.0009){ vy = 0; if(!reduce) ry += 0.0024; }  /* idle auto-spin */
+    }
+    rx = Math.max(-0.7, Math.min(0.7, rx));
+    place();
+    raf = requestAnimationFrame(frame);
+  }
+  function start(){ if(!running){ running = true; frame(); } }
+  function stop(){ running = false; if(raf) cancelAnimationFrame(raf); }
+
+  /* drag to rotate in any direction */
+  stage.addEventListener("pointerdown", e=>{
+    dragging = true; moved = 0; lastX = e.clientX; lastY = e.clientY;
+    try { stage.setPointerCapture(e.pointerId); } catch(_){}
+  });
+  stage.addEventListener("pointermove", e=>{
+    if(!dragging) return;
+    const dx = e.clientX - lastX, dy = e.clientY - lastY;
+    lastX = e.clientX; lastY = e.clientY; moved += Math.abs(dx) + Math.abs(dy);
+    ry += dx*0.0085; rx += dy*0.006;
+    vy = Math.max(-0.08, Math.min(0.08, dx*0.0085));
+    vx = Math.max(-0.05, Math.min(0.05, dy*0.006));
+  });
+  function endDrag(e){ if(!dragging) return; dragging = false; try { stage.releasePointerCapture(e.pointerId); } catch(_){} }
+  stage.addEventListener("pointerup", endDrag);
+  stage.addEventListener("pointercancel", endDrag);
+  /* suppress the click that follows a real drag so it doesn't open a repo */
+  stage.addEventListener("click", e=>{ if(moved > 6){ e.preventDefault(); e.stopPropagation(); } }, true);
+
+  measure(); place();
+  window.addEventListener("resize", ()=>{ measure(); place(); });
+  new IntersectionObserver(es=>es.forEach(e=> e.isIntersecting ? start() : stop()), {threshold:.02}).observe(stage);
+})();
+
 /* year */
 setText("#yr", new Date().getFullYear());
 

@@ -109,6 +109,17 @@ const SKILLS = [
   { group: "Certifications & Education", items: ["SnowPro Associate", "MongoDB Associate", "B.Tech, CSE (2013)"] },
 ];
 
+/* ---- 4b. PINNED GITHUB REPOS (the 3D crown in the hero) ------------
+   Each card links to its repo. Order ≈ how they sit around the ring.     */
+const PINNED = [
+  { name: "syrupy-pyspark",        lang: "Python",  desc: "PySpark snapshot-testing plugin for pytest",        url: "https://github.com/nirajkmr007/syrupy-pyspark" },
+  { name: "pyproject-template",    lang: "Python",  desc: "Production-style scaffold for new Python projects", url: "https://github.com/nirajkmr007/pyproject-template" },
+  { name: "ML",                    lang: "Jupyter", desc: "ML algorithms & classic problems from scratch",     url: "https://github.com/nirajkmr007/ML" },
+  { name: "AiBuddy",               lang: "C#",      desc: "An AI assistant built in C#",                       url: "https://github.com/nirajkmr007/AiBuddy" },
+  { name: "Python",                lang: "Python",  desc: "Python practice & code snippets",                   url: "https://github.com/nirajkmr007/Python" },
+  { name: "nirajkmr007.github.io", lang: "Web",     desc: "This portfolio — built & hosted on GitHub Pages",   url: "https://github.com/nirajkmr007/nirajkmr007.github.io" },
+];
+
 /* ---- 5. CERTIFICATIONS (shown in the band under the hero) ----------
    `url` is the public credential-verification link; leave it "" if you
    don't have one yet and the card renders without a Verify button.       */

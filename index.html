@@ -18,7 +18,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <!-- styles live in assets/css/styles.css — bump ?v= on every asset change to bust CDN/browser cache -->
-<link rel="stylesheet" href="assets/css/styles.css?v=16">
+<link rel="stylesheet" href="assets/css/styles.css?v=21">
 </head>
 <body>
 
@@ -47,20 +47,32 @@
 
 <!-- ============================ HERO ============================ -->
 <header class="hero wrap" id="top">
-  <div class="eyebrow">Lead Data / AI Engineer · Bangalore, India</div>
-  <h1>Niraj <span class="accent">Kumar.</span></h1>
-  <p class="hero-lead">I build <strong>scalable, cloud-native data platforms</strong> for the renewable-energy sector — turning terabytes of wind-turbine sensor data into real-time analytics, forecasting, and decision intelligence. 10+ years designing robust data architectures, end to end.</p>
-  <div class="tags">
-    <span class="tag">PySpark</span>
-    <span class="tag">Databricks</span>
-    <span class="tag">Snowflake</span>
-    <span class="tag">AWS</span>
-    <span class="tag">Azure</span>
-    <span class="tag">Spark Streaming</span>
-  </div>
-  <div class="hero-cta">
-    <a href="#work" class="btn-solid">View my work →</a>
-    <a href="#contact" class="btn-ghost">Get in touch</a>
+  <div class="hero-grid">
+    <div class="hero-main">
+      <div class="eyebrow">Lead Data / AI Engineer · Bangalore, India</div>
+      <h1>Niraj <span class="accent">Kumar.</span></h1>
+      <p class="hero-lead">I build <strong>scalable, cloud-native data platforms</strong> for the renewable-energy sector — turning terabytes of wind-turbine sensor data into real-time analytics, forecasting, and decision intelligence. 10+ years designing robust data architectures, end to end.</p>
+      <div class="tags">
+        <span class="tag">PySpark</span>
+        <span class="tag">Databricks</span>
+        <span class="tag">Snowflake</span>
+        <span class="tag">AWS</span>
+        <span class="tag">Azure</span>
+        <span class="tag">Spark Streaming</span>
+      </div>
+      <div class="hero-cta">
+        <a href="#work" class="btn-solid">View my work →</a>
+        <a href="#contact" class="btn-ghost">Get in touch</a>
+      </div>
+    </div>
+    <!-- draggable 3D crown of pinned GitHub repos (built by JS) -->
+    <aside class="hero-side" aria-label="Pinned GitHub projects">
+      <div class="ring-stage" id="projectRing">
+        <svg class="mesh-lines" aria-hidden="true"></svg>
+        <span class="ring-hub" aria-hidden="true"></span>
+      </div>
+      <div class="ring-cap">pinned on github · drag to rotate · click to open</div>
+    </aside>
   </div>
   <div class="stats" id="statStrip"><!-- filled by JS --></div>
 </header>
@@ -154,7 +166,7 @@
 </footer>
 
 <!-- content data, then render/interaction logic (data.js must load first) -->
-<script src="assets/js/data.js?v=16"></script>
-<script src="assets/js/main.js?v=16"></script>
+<script src="assets/js/data.js?v=21"></script>
+<script src="assets/js/main.js?v=21"></script>
 </body>
 </html>
