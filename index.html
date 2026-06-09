@@ -18,7 +18,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <!-- styles live in assets/css/styles.css — bump ?v= on every asset change to bust CDN/browser cache -->
-<link rel="stylesheet" href="assets/css/styles.css?v=21">
+<link rel="stylesheet" href="assets/css/styles.css?v=22">
 </head>
 <body>
 
@@ -28,8 +28,8 @@
     <a href="#top" class="brand">Niraj<b>.</b></a>
     <div class="nav-links">
       <a href="#experience">Experience</a>
-      <a href="#work">Projects</a>
       <a href="#skills">Skills</a>
+      <a href="#work">Projects</a>
       <a href="#contact">Contact</a>
       <a href="https://www.linkedin.com/in/niraj-kumar-0530324a/" target="_blank" rel="noopener">LinkedIn ↗</a>
       <span class="visits" id="visits" title="Visitors to this site" aria-label="Visitor count" hidden>
@@ -67,6 +67,7 @@
     </div>
     <!-- draggable 3D crown of pinned GitHub repos (built by JS) -->
     <aside class="hero-side" aria-label="Pinned GitHub projects">
+      <div class="ring-title">Things I do <em>for fun</em></div>
       <div class="ring-stage" id="projectRing">
         <svg class="mesh-lines" aria-hidden="true"></svg>
         <span class="ring-hub" aria-hidden="true"></span>
@@ -104,27 +105,27 @@
   <div class="medallion" id="medallion"><!-- filled by JS --></div>
 </section>
 
-<!-- ============================ WORK ============================ -->
-<section class="wrap reveal" id="work">
-  <div class="sec-head">
-    <div>
-      <div class="idx">// 02 — selected work</div>
-      <h2>Projects.</h2>
-    </div>
-  </div>
-  <div class="projects" id="projectList"><!-- filled by JS --></div>
-</section>
-
 <!-- ============================ SKILLS ============================ -->
 <section class="wrap reveal" id="skills">
   <div class="sec-head">
     <div>
-      <div class="idx">// 03 — toolkit graph</div>
+      <div class="idx">// 02 — toolkit graph</div>
       <h2>Skills.</h2>
     </div>
   </div>
   <p class="graph-hint">Every skill set is a node in the graph — hover any bubble to pull it into focus.</p>
   <div class="skill-graph" id="skillGraph"><!-- floating nodes filled by JS --></div>
+</section>
+
+<!-- ============================ WORK ============================ -->
+<section class="wrap reveal" id="work">
+  <div class="sec-head">
+    <div>
+      <div class="idx">// 03 — selected work</div>
+      <h2>Projects.</h2>
+    </div>
+  </div>
+  <div class="projects" id="projectList"><!-- filled by JS --></div>
 </section>
 
 <!-- ============================ CONTACT ============================ -->
@@ -166,7 +167,7 @@
 </footer>
 
 <!-- content data, then render/interaction logic (data.js must load first) -->
-<script src="assets/js/data.js?v=21"></script>
-<script src="assets/js/main.js?v=21"></script>
+<script src="assets/js/data.js?v=22"></script>
+<script src="assets/js/main.js?v=22"></script>
 </body>
 </html>

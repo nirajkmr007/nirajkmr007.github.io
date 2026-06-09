@@ -255,23 +255,30 @@ setHTML("#certBand", CERTS.map(c=>{
   function start(){ if(!running){ running = true; frame(); } }
   function stop(){ running = false; if(raf) cancelAnimationFrame(raf); }
 
-  /* drag to rotate in any direction */
-  stage.addEventListener("pointerdown", e=>{
-    dragging = true; moved = 0; lastX = e.clientX; lastY = e.clientY;
-    try { stage.setPointerCapture(e.pointerId); } catch(_){}
-  });
-  stage.addEventListener("pointermove", e=>{
+  /* drag to rotate in any direction. NB: no setPointerCapture — capturing
+     would retarget the follow-up click off the card's <a>, breaking the link.
+     Instead we listen on window during the drag so it works past the edges. */
+  function onMove(e){
     if(!dragging) return;
     const dx = e.clientX - lastX, dy = e.clientY - lastY;
     lastX = e.clientX; lastY = e.clientY; moved += Math.abs(dx) + Math.abs(dy);
     ry += dx*0.0085; rx += dy*0.006;
     vy = Math.max(-0.08, Math.min(0.08, dx*0.0085));
     vx = Math.max(-0.05, Math.min(0.05, dy*0.006));
+  }
+  function onUp(){
+    if(!dragging) return; dragging = false;
+    window.removeEventListener("pointermove", onMove);
+    window.removeEventListener("pointerup", onUp);
+    window.removeEventListener("pointercancel", onUp);
+  }
+  stage.addEventListener("pointerdown", e=>{
+    dragging = true; moved = 0; lastX = e.clientX; lastY = e.clientY;
+    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointerup", onUp);
+    window.addEventListener("pointercancel", onUp);
   });
-  function endDrag(e){ if(!dragging) return; dragging = false; try { stage.releasePointerCapture(e.pointerId); } catch(_){} }
-  stage.addEventListener("pointerup", endDrag);
-  stage.addEventListener("pointercancel", endDrag);
-  /* suppress the click that follows a real drag so it doesn't open a repo */
+  /* a real drag shouldn't open a repo; a clean click should (opens in new tab) */
   stage.addEventListener("click", e=>{ if(moved > 6){ e.preventDefault(); e.stopPropagation(); } }, true);
 
   measure(); place();

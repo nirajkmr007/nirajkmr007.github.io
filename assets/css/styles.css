@@ -150,6 +150,9 @@ nav{
 /* the cta block already has its own margin; remove the doubled gap inside the grid */
 .hero-main .hero-cta{margin-bottom:0}
 .hero-side{min-width:0;display:flex;flex-direction:column;align-items:center;gap:12px}
+.ring-title{font-family:var(--font-display);font-weight:600;font-size:1.15rem;letter-spacing:-.01em;
+  color:var(--text);text-align:center}
+.ring-title em{font-style:normal;color:var(--accent)}
 
 .ring-stage{position:relative;width:100%;max-width:440px;height:340px;margin:0 auto;
   touch-action:none;cursor:grab;-webkit-user-select:none;user-select:none}
