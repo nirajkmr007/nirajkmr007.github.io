@@ -201,7 +201,7 @@ setHTML("#certBand", CERTS.map(c=>{
   }
 
   const reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
-  let ry = 0, rx = 0.42, vy = 0, vx = 0;
+  let ry = 0, rx = 0.30, vy = 0, vx = 0;
   let dragging = false, lastX = 0, lastY = 0, moved = 0;
   let W = 0, H = 0, cx = 0, cy = 0, R = 140, D = 340, frontIdx = -1, raf = null, running = false;
 
